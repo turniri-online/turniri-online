@@ -2,19 +2,24 @@ import Navbar from '../../../components/Navbar';
 import { getMockTournamentById } from '../../../lib/mockDb';
 import Card from '../../../components/ui/Card';
 import Button from '../../../components/ui/Button';
-import type { PageParams } from "next";
 
-export default function TournamentPage({ params }: { params: PageParams }) {
-  const id = params.id as string;
+type PageProps = {
+  params: {
+    id: string;
+  };
+};
 
-  const t = getMockTournamentById(id);
-  if (!t)
+export default function TournamentPage({ params }: PageProps) {
+  const t = getMockTournamentById(params.id);
+
+  if (!t) {
     return (
       <main>
         <Navbar />
         <div className="container p-6">Turnir nije pronađen.</div>
       </main>
     );
+  }
 
   return (
     <main>
