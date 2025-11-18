@@ -3,14 +3,11 @@ import { getMockTournamentById } from '../../../lib/mockDb';
 import Card from '../../../components/ui/Card';
 import Button from '../../../components/ui/Button';
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
+export default async function TournamentPage(props: any) {
+  const params = await props.params; // ← VERCEL FIX
+  const id = params.id as string;
 
-export default function TournamentPage({ params }: PageProps) {
-  const t = getMockTournamentById(params.id);
+  const t = getMockTournamentById(id);
 
   if (!t) {
     return (
